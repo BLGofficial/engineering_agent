@@ -12,6 +12,7 @@ import {
   Clock,
   Trash2,
 } from "lucide-react";
+import { trpc } from "@/lib/trpc";
 
 const MASTER_SYSTEM_PROMPT = `You are an elite AI Role Engineering Specialist with 15+ years of expertise in computational linguistics, behavioral AI design, and persona architecture. You create production-ready role-based prompts that transform AI models into highly specialized, contextually appropriate agents.
 
@@ -147,6 +148,9 @@ export default function Home() {
   const [checkedItems, setCheckedItems] = useState<Record<number, boolean>>({});
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+  // tRPC mutation for generating role
+  const generateRoleMutation = trpc.roleEngine.generate.useMutation();
+
   // Load recent personas from localStorage
   useEffect(() => {
     const saved = localStorage.getItem("recentPersonas");
@@ -183,45 +187,20 @@ export default function Home() {
 
     try {
       setPipelineStep("generating");
-      const apiKey = import.meta.env.VITE_FRONTEND_FORGE_API_KEY;
-      const apiUrl = import.meta.env.VITE_FRONTEND_FORGE_API_URL;
-
-      if (!apiKey || !apiUrl) {
-        throw new Error("API configuration missing");
-      }
-
-      const res = await fetch(`${apiUrl}/v1/messages`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": apiKey,
-        },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 4000,
-          system: MASTER_SYSTEM_PROMPT,
-          messages: [
-            {
-              role: "user",
-              content: `Create a complete role-based AI persona package for: ${input}`,
-            },
-          ],
-        }),
+      
+      const result = await generateRoleMutation.mutateAsync({
+        topic: input,
+        masterPrompt: MASTER_SYSTEM_PROMPT,
       });
 
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.error?.message || "Failed to generate role");
+      if (result.success && result.data) {
+        setRoleData(result.data);
+        savePersona(result.data, input);
+        setPipelineStep("ready");
+        setCheckedItems({});
+      } else {
+        throw new Error(result.error || "Failed to generate role");
       }
-
-      const data = await res.json();
-      const text = data.content.map((b: any) => b.text || "").join("");
-      const clean = text.replace(/```json|```/g, "").trim();
-      const parsed = JSON.parse(clean);
-      setRoleData(parsed);
-      savePersona(parsed, input);
-      setPipelineStep("ready");
-      setCheckedItems({});
     } catch (e) {
       setError(e instanceof Error ? e.message : "Failed to generate role");
       setPipelineStep("idle");
@@ -457,7 +436,7 @@ export default function Home() {
                 <GlassCard className="p-12 flex justify-center animate-slide-up" glow>
                   <div className="flex flex-col items-center gap-4">
                     <Loader2 className="w-8 h-8 animate-spin text-orange-500" />
-                    <p className="text-sm text-orange-200 font-semibold">Engineering your role...</p>
+                    <p className="text-sm text-orange-200 font-semibold">Engineering your role with Kimi AI...</p>
                   </div>
                 </GlassCard>
               )}
