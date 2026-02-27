@@ -68,7 +68,7 @@ function GlassCard({ children, className = "", glow = false, style }: { children
   return (
     <div
       style={style}
-      className={`bg-white/8 backdrop-blur-2xl border border-amber-400/30 rounded-2xl shadow-2xl transition-all duration-500 hover:border-amber-400/60 hover:bg-white/12 hover:shadow-2xl ${
+      className={`bg-white/5 backdrop-blur-2xl border border-orange-500/40 rounded-2xl shadow-2xl transition-all duration-500 hover:border-orange-400/70 hover:bg-white/8 hover:shadow-2xl ${
         glow ? "animate-glow-pulse" : ""
       } ${className}`}
     >
@@ -89,10 +89,10 @@ function PipelineStep({
       <div
         className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs transition-all duration-500 ${
           status === "complete"
-            ? "bg-gradient-to-br from-amber-400 to-yellow-500 text-amber-950 shadow-lg shadow-amber-400/50 animate-pulse-glow"
+            ? "bg-gradient-to-br from-orange-500 to-orange-600 text-white shadow-lg shadow-orange-500/50 animate-pulse-glow"
             : status === "active"
-              ? "bg-gradient-to-br from-orange-500 to-amber-500 text-white animate-pulse-glow"
-              : "bg-amber-950/40 text-amber-300/60 border border-amber-400/20"
+              ? "bg-gradient-to-br from-orange-400 to-orange-500 text-white animate-pulse-glow"
+              : "bg-orange-950/40 text-orange-300/60 border border-orange-500/20"
         }`}
       >
         {status === "complete" ? "✓" : status === "active" ? "●" : "○"}
@@ -100,10 +100,10 @@ function PipelineStep({
       <span
         className={`text-xs font-semibold transition-all duration-500 ${
           status === "complete"
-            ? "text-amber-300"
+            ? "text-orange-300"
             : status === "active"
               ? "text-orange-300 font-bold"
-              : "text-amber-200/50"
+              : "text-orange-200/50"
         }`}
       >
         {label}
@@ -124,13 +124,13 @@ function CopyButton({ text }: { text: string }) {
   return (
     <button
       onClick={handleCopy}
-      className="p-2 hover:bg-amber-400/20 rounded-lg transition-all duration-300 hover:scale-110 active:scale-95"
+      className="p-2 hover:bg-orange-500/20 rounded-lg transition-all duration-300 hover:scale-110 active:scale-95"
       title="Copy to clipboard"
     >
       {copied ? (
-        <Check size={16} className="text-amber-300 animate-bounce-in" />
+        <Check size={16} className="text-orange-300 animate-bounce-in" />
       ) : (
-        <Copy size={16} className="text-amber-200/70 hover:text-amber-300 transition-colors" />
+        <Copy size={16} className="text-orange-200/70 hover:text-orange-300 transition-colors" />
       )}
     </button>
   );
@@ -271,22 +271,22 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-950 via-amber-900 to-amber-950 text-white font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-black text-white font-sans overflow-x-hidden">
       {/* Animated background elements */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-400/15 rounded-full blur-3xl animate-pulse-glow" style={{ animationDuration: "8s" }} />
-        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-yellow-400/10 rounded-full blur-3xl animate-pulse-glow" style={{ animationDuration: "10s", animationDelay: "2s" }} />
-        <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-orange-400/10 rounded-full blur-3xl animate-pulse-glow" style={{ animationDuration: "12s", animationDelay: "4s" }} />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl animate-pulse-glow" style={{ animationDuration: "8s" }} />
+        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-orange-400/8 rounded-full blur-3xl animate-pulse-glow" style={{ animationDuration: "10s", animationDelay: "2s" }} />
+        <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-orange-500/8 rounded-full blur-3xl animate-pulse-glow" style={{ animationDuration: "12s", animationDelay: "4s" }} />
       </div>
 
       <style>{`
         @keyframes glow-pulse {
-          0%, 100% { box-shadow: 0 0 20px rgba(251, 146, 60, 0.3), inset 0 0 20px rgba(251, 146, 60, 0.1); }
-          50% { box-shadow: 0 0 40px rgba(251, 146, 60, 0.6), inset 0 0 30px rgba(251, 146, 60, 0.2); }
+          0%, 100% { box-shadow: 0 0 20px rgba(255, 140, 0, 0.3), inset 0 0 20px rgba(255, 140, 0, 0.1); }
+          50% { box-shadow: 0 0 40px rgba(255, 140, 0, 0.6), inset 0 0 30px rgba(255, 140, 0, 0.2); }
         }
         @keyframes pulse-glow {
-          0%, 100% { box-shadow: 0 0 10px rgba(251, 146, 60, 0.5), 0 0 20px rgba(251, 146, 60, 0.3); }
-          50% { box-shadow: 0 0 20px rgba(251, 146, 60, 0.8), 0 0 40px rgba(251, 146, 60, 0.5); }
+          0%, 100% { box-shadow: 0 0 10px rgba(255, 140, 0, 0.5), 0 0 20px rgba(255, 140, 0, 0.3); }
+          50% { box-shadow: 0 0 20px rgba(255, 140, 0, 0.8), 0 0 40px rgba(255, 140, 0, 0.5); }
         }
         @keyframes bounce-in {
           0% { opacity: 0; transform: scale(0.5); }
@@ -299,10 +299,6 @@ export default function Home() {
         @keyframes slide-up {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes shimmer {
-          0%, 100% { background-position: 200% center; }
-          50% { background-position: -200% center; }
         }
         .animate-glow-pulse {
           animation: glow-pulse 3s ease-in-out infinite;
@@ -323,16 +319,16 @@ export default function Home() {
 
       <div className="relative z-10 flex h-screen overflow-hidden">
         {/* Sidebar */}
-        <div className="w-64 border-r border-amber-400/20 bg-gradient-to-b from-amber-950/90 to-amber-900/90 backdrop-blur-xl flex flex-col overflow-y-auto animate-slide-up">
+        <div className="w-64 border-r border-orange-500/20 bg-black flex flex-col overflow-y-auto animate-slide-up">
           {/* Logo/Header */}
-          <div className="p-6 border-b border-amber-400/20">
+          <div className="p-6 border-b border-orange-500/20">
             <div className="flex items-center gap-3 mb-2 animate-fade-in">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-400 to-yellow-500 flex items-center justify-center shadow-lg shadow-amber-400/50 animate-pulse-glow">
-                <Sparkles size={20} className="text-amber-950" />
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/50 animate-pulse-glow">
+                <Sparkles size={20} className="text-white" />
               </div>
               <div>
                 <div className="text-sm font-bold text-white">AI Engineer</div>
-                <div className="text-xs text-amber-300">v1.0</div>
+                <div className="text-xs text-orange-400">v1.0</div>
               </div>
             </div>
           </div>
@@ -341,22 +337,22 @@ export default function Home() {
           <div className="p-4 m-4 animate-fade-in" style={{ animationDelay: "0.1s" }}>
             <GlassCard className="p-4 glow" glow>
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 shadow-lg shadow-amber-400/50 animate-pulse-glow" />
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 shadow-lg shadow-orange-500/50 animate-pulse-glow" />
                 <div className="flex-1">
                   <div className="text-xs font-bold text-white">AI Engineer</div>
-                  <div className="text-xs text-amber-200">Active</div>
+                  <div className="text-xs text-orange-300">Active</div>
                 </div>
               </div>
               <div className="flex items-center gap-2 text-xs">
-                <div className="w-2 h-2 rounded-full bg-amber-300 animate-pulse-glow" />
-                <span className="text-amber-200 font-semibold">System Ready</span>
+                <div className="w-2 h-2 rounded-full bg-orange-400 animate-pulse-glow" />
+                <span className="text-orange-200 font-semibold">System Ready</span>
               </div>
             </GlassCard>
           </div>
 
           {/* Recent Personas */}
-          <div className="flex-1 px-4 py-6 border-t border-amber-400/20">
-            <div className="text-xs font-bold text-amber-300 mb-3 flex items-center gap-2">
+          <div className="flex-1 px-4 py-6 border-t border-orange-500/20">
+            <div className="text-xs font-bold text-orange-400 mb-3 flex items-center gap-2">
               <Clock size={14} />
               RECENT PERSONAS
             </div>
@@ -364,7 +360,7 @@ export default function Home() {
               {recentPersonas.map((persona, idx) => (
                 <div
                   key={persona.id}
-                  className="group p-3 rounded-lg bg-amber-400/10 hover:bg-amber-400/20 transition-all duration-300 cursor-pointer relative animate-fade-in hover:shadow-lg hover:shadow-amber-400/30"
+                  className="group p-3 rounded-lg bg-orange-500/10 hover:bg-orange-500/20 transition-all duration-300 cursor-pointer relative animate-fade-in hover:shadow-lg hover:shadow-orange-500/30"
                   style={{ animationDelay: `${idx * 0.05}s` }}
                   onClick={() => {
                     setRoleData(persona.data);
@@ -373,7 +369,7 @@ export default function Home() {
                   }}
                 >
                   <div className="text-xs font-semibold text-white truncate pr-6">{persona.name}</div>
-                  <div className="text-xs text-amber-200/70 truncate">{persona.topic}</div>
+                  <div className="text-xs text-orange-200/70 truncate">{persona.topic}</div>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
@@ -381,7 +377,7 @@ export default function Home() {
                     }}
                     className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   >
-                    <Trash2 size={12} className="text-amber-300/60 hover:text-red-400 transition-colors" />
+                    <Trash2 size={12} className="text-orange-300/60 hover:text-red-400 transition-colors" />
                   </button>
                 </div>
               ))}
@@ -389,8 +385,8 @@ export default function Home() {
           </div>
 
           {/* Settings */}
-          <div className="p-4 border-t border-amber-400/20">
-            <button className="w-full flex items-center gap-2 px-3 py-2 rounded-lg bg-amber-400/15 hover:bg-amber-400/25 transition-all duration-300 text-xs font-semibold text-amber-200 hover:text-white hover:shadow-lg hover:shadow-amber-400/30">
+          <div className="p-4 border-t border-orange-500/20">
+            <button className="w-full flex items-center gap-2 px-3 py-2 rounded-lg bg-orange-500/15 hover:bg-orange-500/25 transition-all duration-300 text-xs font-semibold text-orange-200 hover:text-white hover:shadow-lg hover:shadow-orange-500/30">
               <Settings size={14} />
               Settings
             </button>
@@ -400,15 +396,15 @@ export default function Home() {
         {/* Main Content */}
         <div className="flex-1 flex flex-col overflow-hidden">
           {/* Top Bar */}
-          <div className="h-16 border-b border-amber-400/20 bg-gradient-to-r from-amber-950/80 to-amber-900/80 backdrop-blur-xl flex items-center px-8 justify-between animate-slide-up">
+          <div className="h-16 border-b border-orange-500/20 bg-black flex items-center px-8 justify-between animate-slide-up">
             <div>
               <h1 className="text-2xl font-bold text-white">Role Engineering Studio</h1>
-              <p className="text-xs text-amber-200/70">Master Framework Powered</p>
+              <p className="text-xs text-orange-200/70">Master Framework Powered</p>
             </div>
             <div className="flex items-center gap-3">
               <div className="text-right">
-                <div className="text-xs text-amber-200/70">Status</div>
-                <div className="text-sm font-bold text-amber-300 animate-pulse-glow">Ready</div>
+                <div className="text-xs text-orange-200/70">Status</div>
+                <div className="text-sm font-bold text-orange-400 animate-pulse-glow">Ready</div>
               </div>
             </div>
           </div>
@@ -419,7 +415,7 @@ export default function Home() {
               {/* Input Section */}
               <GlassCard className="p-8 animate-slide-up" glow>
                 <label className="block text-sm font-bold text-white mb-4 flex items-center gap-2">
-                  <Sparkles size={16} className="text-amber-300 animate-pulse-glow" />
+                  <Sparkles size={16} className="text-orange-400 animate-pulse-glow" />
                   DESCRIBE YOUR ROLE
                 </label>
                 <textarea
@@ -430,17 +426,17 @@ export default function Home() {
                     if (e.key === "Enter" && e.metaKey) handleGenerate();
                   }}
                   placeholder="A senior data scientist who explains ML concepts to non-technical executives..."
-                  className="w-full min-h-32 bg-amber-950/60 border border-amber-400/30 rounded-xl text-white text-sm p-4 focus:border-amber-300/60 focus:outline-none focus:ring-2 focus:ring-amber-400/30 transition-all placeholder-amber-200/40"
+                  className="w-full min-h-32 bg-white/5 border border-orange-500/30 rounded-xl text-white text-sm p-4 focus:border-orange-400/60 focus:outline-none focus:ring-2 focus:ring-orange-500/30 transition-all placeholder-orange-200/40"
                 />
                 <div className="flex justify-between items-center mt-4">
-                  <span className="text-xs text-amber-200/60">{input.length} characters</span>
+                  <span className="text-xs text-orange-200/60">{input.length} characters</span>
                   <button
                     onClick={handleGenerate}
                     disabled={loading || !input.trim()}
                     className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 ${
                       loading || !input.trim()
-                        ? "bg-amber-950/60 text-amber-200/40 cursor-not-allowed"
-                        : "bg-gradient-to-r from-amber-500 to-yellow-500 text-amber-950 hover:shadow-2xl hover:shadow-amber-400/50 hover:scale-105 active:scale-95 animate-pulse-glow"
+                        ? "bg-orange-950/60 text-orange-200/40 cursor-not-allowed"
+                        : "bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:shadow-2xl hover:shadow-orange-500/50 hover:scale-105 active:scale-95 animate-pulse-glow"
                     }`}
                   >
                     <Zap size={16} />
@@ -460,8 +456,8 @@ export default function Home() {
               {loading && (
                 <GlassCard className="p-12 flex justify-center animate-slide-up" glow>
                   <div className="flex flex-col items-center gap-4">
-                    <Loader2 className="w-8 h-8 animate-spin text-amber-400" />
-                    <p className="text-sm text-amber-200 font-semibold">Engineering your role...</p>
+                    <Loader2 className="w-8 h-8 animate-spin text-orange-500" />
+                    <p className="text-sm text-orange-200 font-semibold">Engineering your role...</p>
                   </div>
                 </GlassCard>
               )}
@@ -469,14 +465,14 @@ export default function Home() {
               {/* Pipeline Tracker */}
               {roleData && (
                 <GlassCard className="p-6 animate-slide-up" glow>
-                  <div className="text-xs font-bold text-amber-300 mb-4">GENERATION PIPELINE</div>
+                  <div className="text-xs font-bold text-orange-400 mb-4">GENERATION PIPELINE</div>
                   <div className="flex items-center justify-between">
                     <PipelineStep label="Topic Received" status={pipelineStep !== "idle" ? "complete" : "pending"} />
-                    <ChevronRight size={16} className="text-amber-400/50" />
+                    <ChevronRight size={16} className="text-orange-500/50" />
                     <PipelineStep label="Prompts Generating" status={pipelineStep === "ready" ? "complete" : pipelineStep === "generating" ? "active" : "pending"} />
-                    <ChevronRight size={16} className="text-amber-400/50" />
+                    <ChevronRight size={16} className="text-orange-500/50" />
                     <PipelineStep label="Awaiting Review" status={pipelineStep === "ready" ? "complete" : "pending"} />
-                    <ChevronRight size={16} className="text-amber-400/50" />
+                    <ChevronRight size={16} className="text-orange-500/50" />
                     <PipelineStep label="Ready to Export" status={pipelineStep === "ready" ? "active" : "pending"} />
                   </div>
                 </GlassCard>
@@ -490,13 +486,13 @@ export default function Home() {
                     <div className="flex items-start justify-between mb-6">
                       <div>
                         <h2 className="text-3xl font-bold text-white mb-2">{roleData.roleName}</h2>
-                        <p className="text-amber-100 text-sm leading-relaxed max-w-2xl">{roleData.coreFunction}</p>
+                        <p className="text-orange-100 text-sm leading-relaxed max-w-2xl">{roleData.coreFunction}</p>
                       </div>
                       <div className="flex gap-2">
-                        <span className="px-3 py-1 rounded-full bg-amber-400/25 border border-amber-400/50 text-amber-200 text-xs font-semibold animate-pulse-glow">
+                        <span className="px-3 py-1 rounded-full bg-orange-500/25 border border-orange-500/50 text-orange-200 text-xs font-semibold animate-pulse-glow">
                           {roleData.keyAttributes.expertiseLevel}
                         </span>
-                        <span className="px-3 py-1 rounded-full bg-yellow-400/20 border border-yellow-400/40 text-yellow-200 text-xs font-semibold animate-pulse-glow">
+                        <span className="px-3 py-1 rounded-full bg-orange-400/20 border border-orange-400/40 text-orange-200 text-xs font-semibold animate-pulse-glow">
                           {roleData.keyAttributes.tone}
                         </span>
                       </div>
@@ -507,12 +503,12 @@ export default function Home() {
                   <GlassCard className="p-6 animate-slide-up" glow>
                     <div className="flex items-center justify-between mb-4">
                       <label className="text-sm font-bold text-white flex items-center gap-2">
-                        <Sparkles size={14} className="text-amber-300 animate-pulse-glow" />
+                        <Sparkles size={14} className="text-orange-400 animate-pulse-glow" />
                         SYSTEM PROMPT
                       </label>
                       <CopyButton text={roleData.systemPrompt} />
                     </div>
-                    <pre className="bg-amber-950/60 border border-amber-400/30 rounded-lg p-4 text-xs text-amber-100 overflow-x-auto max-h-64 font-mono leading-relaxed">
+                    <pre className="bg-white/5 border border-orange-500/30 rounded-lg p-4 text-xs text-orange-100 overflow-x-auto max-h-64 font-mono leading-relaxed">
                       {roleData.systemPrompt}
                     </pre>
                   </GlassCard>
@@ -522,10 +518,10 @@ export default function Home() {
                     {/* User Message Template */}
                     <GlassCard className="p-6 animate-slide-up" glow style={{ animationDelay: "0.1s" }}>
                       <label className="text-sm font-bold text-white mb-4 block flex items-center gap-2">
-                        <Sparkles size={14} className="text-amber-300 animate-pulse-glow" />
+                        <Sparkles size={14} className="text-orange-400 animate-pulse-glow" />
                         USER MESSAGE TEMPLATE
                       </label>
-                      <pre className="bg-amber-950/60 border border-amber-400/30 rounded-lg p-4 text-xs text-amber-100 overflow-x-auto max-h-48 font-mono leading-relaxed">
+                      <pre className="bg-white/5 border border-orange-500/30 rounded-lg p-4 text-xs text-orange-100 overflow-x-auto max-h-48 font-mono leading-relaxed">
                         {roleData.userPrompt}
                       </pre>
                     </GlassCard>
@@ -533,10 +529,10 @@ export default function Home() {
                     {/* Reusable Template */}
                     <GlassCard className="p-6 animate-slide-up" glow style={{ animationDelay: "0.15s" }}>
                       <label className="text-sm font-bold text-white mb-4 block flex items-center gap-2">
-                        <Sparkles size={14} className="text-amber-300 animate-pulse-glow" />
+                        <Sparkles size={14} className="text-orange-400 animate-pulse-glow" />
                         REUSABLE TEMPLATE
                       </label>
-                      <pre className="bg-amber-950/60 border border-amber-400/30 rounded-lg p-4 text-xs text-amber-100 overflow-x-auto max-h-48 font-mono leading-relaxed">
+                      <pre className="bg-white/5 border border-orange-500/30 rounded-lg p-4 text-xs text-orange-100 overflow-x-auto max-h-48 font-mono leading-relaxed">
                         {roleData.reuseTemplate}
                       </pre>
                     </GlassCard>
@@ -544,18 +540,18 @@ export default function Home() {
                     {/* Example Exchanges */}
                     <GlassCard className="p-6 lg:col-span-2 animate-slide-up" glow style={{ animationDelay: "0.2s" }}>
                       <label className="text-sm font-bold text-white mb-4 block flex items-center gap-2">
-                        <Sparkles size={14} className="text-amber-300 animate-pulse-glow" />
+                        <Sparkles size={14} className="text-orange-400 animate-pulse-glow" />
                         EXAMPLE EXCHANGES
                       </label>
                       <div className="space-y-4">
                         {[roleData.example1, roleData.example2].map((ex, i) => (
-                          <div key={i} className="bg-amber-950/60 border border-amber-400/30 rounded-lg p-4 hover:border-amber-400/60 transition-all duration-300">
-                            <div className="text-xs font-bold text-amber-300 mb-2">{ex.scenario}</div>
-                            <div className="text-xs text-amber-100 mb-2">
-                              <span className="text-amber-300 font-semibold">Input:</span> {ex.input}
+                          <div key={i} className="bg-white/5 border border-orange-500/30 rounded-lg p-4 hover:border-orange-500/60 transition-all duration-300">
+                            <div className="text-xs font-bold text-orange-400 mb-2">{ex.scenario}</div>
+                            <div className="text-xs text-orange-100 mb-2">
+                              <span className="text-orange-400 font-semibold">Input:</span> {ex.input}
                             </div>
-                            <div className="text-xs text-amber-100">
-                              <span className="text-amber-300 font-semibold">Output:</span> {ex.output}
+                            <div className="text-xs text-orange-100">
+                              <span className="text-orange-400 font-semibold">Output:</span> {ex.output}
                             </div>
                           </div>
                         ))}
@@ -565,7 +561,7 @@ export default function Home() {
                     {/* Evaluator Checklist */}
                     <GlassCard className="p-6 animate-slide-up" glow style={{ animationDelay: "0.25s" }}>
                       <label className="text-sm font-bold text-white mb-4 block flex items-center gap-2">
-                        <Sparkles size={14} className="text-amber-300 animate-pulse-glow" />
+                        <Sparkles size={14} className="text-orange-400 animate-pulse-glow" />
                         EVALUATOR CHECKLIST
                       </label>
                       <div className="space-y-2">
@@ -575,9 +571,9 @@ export default function Home() {
                               type="checkbox"
                               checked={checkedItems[i] || false}
                               onChange={(e) => setCheckedItems((p) => ({ ...p, [i]: e.target.checked }))}
-                              className="mt-1 w-4 h-4 rounded border-amber-400/50 bg-amber-950/60 accent-amber-400 cursor-pointer"
+                              className="mt-1 w-4 h-4 rounded border-orange-500/50 bg-white/5 accent-orange-500 cursor-pointer"
                             />
-                            <span className="text-xs text-amber-100 group-hover:text-white transition-colors duration-300">
+                            <span className="text-xs text-orange-100 group-hover:text-white transition-colors duration-300">
                               {item}
                             </span>
                           </label>
@@ -588,29 +584,29 @@ export default function Home() {
                     {/* Usage Notes */}
                     <GlassCard className="p-6 animate-slide-up" glow style={{ animationDelay: "0.3s" }}>
                       <label className="text-sm font-bold text-white mb-4 block flex items-center gap-2">
-                        <Sparkles size={14} className="text-amber-300 animate-pulse-glow" />
+                        <Sparkles size={14} className="text-orange-400 animate-pulse-glow" />
                         USAGE NOTES
                       </label>
-                      <p className="text-xs text-amber-100 leading-relaxed max-h-32 overflow-y-auto">
+                      <p className="text-xs text-orange-100 leading-relaxed max-h-32 overflow-y-auto">
                         {roleData.usageNotes}
                       </p>
                     </GlassCard>
                   </div>
 
                   {/* Export Card */}
-                  <GlassCard className="p-8 border-amber-300/50 bg-gradient-to-r from-amber-400/20 to-yellow-400/10 animate-slide-up" glow>
+                  <GlassCard className="p-8 border-orange-400/50 bg-gradient-to-r from-orange-500/20 to-orange-400/10 animate-slide-up" glow>
                     <div className="flex items-center justify-between mb-6">
                       <div>
                         <h3 className="text-lg font-bold text-white mb-2">Ready to Export</h3>
-                        <p className="text-sm text-amber-100">Your complete role package is ready for download</p>
+                        <p className="text-sm text-orange-100">Your complete role package is ready for download</p>
                       </div>
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-400 to-yellow-500 animate-pulse-glow shadow-lg shadow-amber-400/50" />
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 animate-pulse-glow shadow-lg shadow-orange-500/50" />
                     </div>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
                       {["system_prompt.md", "user_prompt.md", "reuse_template.md", "examples.md", "evaluator_checklist.md", "usage_notes.md", "persona_attributes.md", "complete_package.json"].map((file) => (
                         <div key={file} className="text-center">
-                          <div className="text-xs text-amber-300 mb-1 font-semibold">✓</div>
-                          <div className="text-xs font-medium text-amber-100 truncate">{file}</div>
+                          <div className="text-xs text-orange-400 mb-1 font-semibold">✓</div>
+                          <div className="text-xs font-medium text-orange-100 truncate">{file}</div>
                         </div>
                       ))}
                     </div>
@@ -622,7 +618,7 @@ export default function Home() {
                           setError(null);
                           setPipelineStep("idle");
                         }}
-                        className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-amber-400/40 text-amber-200 text-sm font-bold hover:bg-amber-400/15 transition-all duration-300 hover:shadow-lg hover:shadow-amber-400/30 hover:scale-105 active:scale-95"
+                        className="flex-1 flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-orange-500/40 text-orange-200 text-sm font-bold hover:bg-orange-500/15 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/30 hover:scale-105 active:scale-95"
                       >
                         <RotateCcw size={16} />
                         NEW ROLE
@@ -632,8 +628,8 @@ export default function Home() {
                         disabled={downloading}
                         className={`flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all duration-300 ${
                           downloading
-                            ? "bg-amber-950/60 text-amber-200/40 cursor-not-allowed"
-                            : "bg-gradient-to-r from-amber-400 to-yellow-500 text-amber-950 hover:shadow-2xl hover:shadow-amber-400/50 hover:scale-105 active:scale-95 animate-pulse-glow"
+                            ? "bg-orange-950/60 text-orange-200/40 cursor-not-allowed"
+                            : "bg-gradient-to-r from-orange-500 to-orange-600 text-white hover:shadow-2xl hover:shadow-orange-500/50 hover:scale-105 active:scale-95 animate-pulse-glow"
                         }`}
                       >
                         <Download size={16} />
