@@ -2,17 +2,35 @@ import { z } from "zod";
 import { publicProcedure, router } from "../_core/trpc";
 import { invokeLLM } from "../_core/llm";
 
+type ModelType = "kimi-k2" | "llama-3.3" | "gemma2-9b" | "deepseek-r1";
+
+const MODEL_CONFIG: Record<ModelType, { name: string; model: string }> = {
+  "kimi-k2": { name: "Kimi K2", model: "moonshotai/kimi-k2-instruct-0905" },
+  "llama-3.3": { name: "Llama 3.3 70B", model: "meta-llama/llama-3.3-70b-instruct" },
+  "gemma2-9b": { name: "Gemma2 9B", model: "google/gemma-2-9b-it" },
+  "deepseek-r1": { name: "DeepSeek R1", model: "deepseek-ai/deepseek-r1" },
+};
+
 export const roleEngineRouter = router({
+  listModels: publicProcedure.query(() => {
+    return Object.entries(MODEL_CONFIG).map(([key, value]) => ({
+      id: key,
+      name: value.name,
+      model: value.model,
+    }));
+  }),
+
   generate: publicProcedure
     .input(
       z.object({
         topic: z.string().min(1, "Topic is required"),
         masterPrompt: z.string().min(1, "Master prompt is required"),
+        model: z.enum(["kimi-k2", "llama-3.3", "gemma2-9b", "deepseek-r1"]).default("kimi-k2"),
       })
     )
     .mutation(async ({ input }) => {
       try {
-        // Call Kimi AI via the LLM helper (which uses Groq API)
+        // Call LLM via the helper (which uses Groq API)
         const response = await invokeLLM({
           messages: [
             {
@@ -49,14 +67,12 @@ export const roleEngineRouter = router({
         return {
           success: true,
           data: parsed,
+          model: MODEL_CONFIG[input.model].name,
         };
       } catch (error) {
-        console.error("[Role Engine] Generation failed:", error);
-        return {
-          success: false,
-          error: error instanceof Error ? error.message : "Failed to generate role",
-          data: null,
-        };
+        const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+        console.error("[Role Engine] Generation failed:", errorMessage);
+        throw new Error(`Failed to generate role: ${errorMessage}`);
       }
     }),
 });
